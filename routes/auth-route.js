@@ -11,7 +11,8 @@ const User = require("../models/user-model.js");
 router.get(
   "/auth/spotify",
   passport.authenticate("spotify", {
-    scope: ["user-read-email", "user-read-private", "user-top-read"]
+    scope: ["user-read-email", "user-read-private", "user-top-read"],
+    showDialog: true
   }),
   function(req, res) {}
 );
@@ -38,10 +39,19 @@ router.post("/auth/token-login", (req, res, next) => {
       }
 
       req.logIn(userDoc, () => {
+        userDoc.spotifyAccesToken = undefined;
+        userDoc.spotifyRefreshToken = undefined;
         res.json(userDoc);
       });
     })
     .catch(err => next(err));
+});
+
+router.get("/logout", (req, res, next) => {
+  // req.logOut() is a Passport method that removes the USER ID from the session
+  req.logOut();
+
+  res.json({ message: "You are logged out !" });
 });
 
 module.exports = router;
