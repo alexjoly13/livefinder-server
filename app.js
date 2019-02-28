@@ -54,4 +54,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+const auth = require("./routes/auth-route.js");
+app.use("/", auth);
+
 module.exports = app;
