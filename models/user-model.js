@@ -3,8 +3,14 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
+    fullName: String,
+    image: String,
     spotifyId: String,
-    loginToken: String
+    email: String,
+    loginToken: String,
+    spotifyLink: String,
+    spotifyAccesToken: String,
+    spotifyRefreshToken: String
   },
   {
     timestamps: true

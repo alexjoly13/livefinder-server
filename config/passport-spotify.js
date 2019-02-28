@@ -26,7 +26,16 @@ passport.use(
             return;
           }
 
-          User.create({ spotifyId: profile.id, loginToken })
+          User.create({
+            fullName: profile.displayName,
+            image: profile._json.images[0].url,
+            email: profile._json.email,
+            spotifyId: profile.id,
+            spotifyLink: profile.profileUrl,
+            spotifyAccesToken: accessToken,
+            spotifyRefreshToken: refreshToken,
+            loginToken
+          })
             .then(userDoc => {
               done(null, userDoc);
             })

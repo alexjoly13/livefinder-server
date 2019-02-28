@@ -11,7 +11,7 @@ const User = require("../models/user-model.js");
 router.get(
   "/auth/spotify",
   passport.authenticate("spotify", {
-    scope: ["user-read-email", "user-read-private"]
+    scope: ["user-read-email", "user-read-private", "user-top-read"]
   }),
   function(req, res) {}
 );
