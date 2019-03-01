@@ -3,9 +3,10 @@ const router = express.Router();
 const axios = require("axios");
 
 router.get("/userInfo", (req, res, next) => {
-  console.log("it works");
+  // console.log("it works");
 
-  const url = "https://api.spotify.com/v1/me/top/artists?limit=10";
+  const url =
+    "https://api.spotify.com/v1/me/top/artists?limit=10&time_range=short_term";
   const accessToken = "Bearer " + req.user.spotifyAccesToken;
 
   axios
@@ -29,21 +30,22 @@ router.get("/userInfo", (req, res, next) => {
       });
 
       Promise.all(eventIndex).then(resultArray => {
-        console.log(resultArray);
+        // console.log(resultArray);
 
         resultArray.forEach(oneResponse => {
-          console.log(oneResponse, "bbbbbbb");
+          // console.log(oneResponse, "bbbbbbb");
 
-          console.log(oneResponse.data.resultsPage, "aaaaaaaaa");
+          // console.log(oneResponse.data.resultsPage, "aaaaaaaaa");
 
-          if (oneResponse.data.resultsPage.totalEntries === 0) {
-            console.log(oneResponse.data.resultsPage);
+          if (oneResponse.data.resultsPage.totalEntries > 0) {
+            // console.log(oneResponse.data.resultsPage);
 
-            tempArray.push(oneResponse.data.resultsPage);
+            tempArray.push(oneResponse);
           }
+          console.log(tempArray);
         });
       });
-      res.json({ tempArray, topArtist });
+      res.json({ tempArray });
     })
     .catch(err => {
       // console.log("wtf--------", err.response.data);
