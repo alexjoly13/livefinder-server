@@ -3,10 +3,10 @@ const router = express.Router();
 const axios = require("axios");
 
 router.get("/userInfo", (req, res, next) => {
-  console.log("it works", req.ip);
+  console.log("it works");
 
   const url =
-    "https://api.spotify.com/v1/me/top/artists?limit=10&time_range=short_term";
+    "https://api.spotify.com/v1/me/top/artists?limit=20&time_range=short_term";
   const accessToken = "Bearer " + req.user.spotifyAccesToken;
 
   axios
@@ -25,7 +25,7 @@ router.get("/userInfo", (req, res, next) => {
       const eventIndex = artistName.map(oneQuery => {
         const name = encodeURIComponent(oneQuery);
         const url = `https://api.songkick.com/api/3.0/events.json?apikey=j091nvHfTVMNsX7r&artist_name=${name}&location=${location}`;
-        console.log(url);
+        // console.log(url);
         return axios.get(url);
       });
 
@@ -37,6 +37,7 @@ router.get("/userInfo", (req, res, next) => {
             }
           });
           res.json(tempArray);
+          console.log(tempArray);
         })
         .catch(err => next(err));
     })
