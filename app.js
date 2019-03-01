@@ -60,4 +60,7 @@ app.use("/", auth);
 const userInfo = require("./routes/spotify-request-route.js");
 app.use("/", userInfo);
 
+const topFrenchPage = require("./routes/top-french-artist-route.js");
+app.use("/", topFrenchPage);
+
 module.exports = app;
