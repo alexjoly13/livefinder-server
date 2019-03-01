@@ -17,7 +17,13 @@ passport.use(
 
       User.findOneAndUpdate(
         { spotifyId: profile.id },
-        { $set: { loginToken } },
+        {
+          $set: {
+            loginToken,
+            spotifyAccesToken: accessToken,
+            spotifyRefreshToken: refreshToken
+          }
+        },
         { new: true }
       )
         .then(userDoc => {

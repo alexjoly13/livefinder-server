@@ -57,4 +57,7 @@ app.use(passport.session());
 const auth = require("./routes/auth-route.js");
 app.use("/", auth);
 
+const userInfo = require("./routes/spotify-request-route.js");
+app.use("/", userInfo);
+
 module.exports = app;
