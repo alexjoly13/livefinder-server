@@ -11,13 +11,17 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
+  if (err.response) {
+    console.error("API Error", req.method, req.path, err.response.data);
+  } else {
+    console.error("ERROR", req.method, req.path, err);
+  }
   // always log the error
-  console.error("ERROR", req.method, req.path, err);
 
   // only render if the error ocurred before sending the response
   if (!res.headersSent) {
     res.status(500);
-    res.json("error");
+    res.json({ message: "error" });
   }
 });
 

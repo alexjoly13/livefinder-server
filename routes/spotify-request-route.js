@@ -3,7 +3,7 @@ const router = express.Router();
 const axios = require("axios");
 
 router.get("/userInfo", (req, res, next) => {
-  console.log("it works");
+  console.log("it works", req.ip);
 
   const url = "https://api.spotify.com/v1/me/top/artists?limit=10";
   const accessToken = "Bearer " + req.user.spotifyAccesToken;
@@ -13,42 +13,33 @@ router.get("/userInfo", (req, res, next) => {
 
     .then(response => {
       // console.log(response.data);
-      artistName = [];
+      const artistName = [];
       response.data.items.forEach(oneArtist => {
         artistName.push(oneArtist.name);
       });
 
-      console.log(artistName);
-
       const tempArray = [];
+      const location = req.ip === "::1" ? "clientip" : req.ip;
 
       const eventIndex = artistName.map(oneQuery => {
-        return axios.get(
-          `https://api.songkick.com/api/3.0/events.json?apikey=XFK6hX8iZ4LjPg6l&artist_name=${oneQuery}&location=clientip`
-        );
+        const name = encodeURIComponent(oneQuery);
+        const url = `https://api.songkick.com/api/3.0/events.json?apikey=j091nvHfTVMNsX7r&artist_name=${name}&location=${location}`;
+        console.log(url);
+        return axios.get(url);
       });
 
-      Promise.all(eventIndex).then(resultArray => {
-        console.log(resultArray);
-
-        resultArray.forEach(oneResponse => {
-          console.log(oneResponse, "bbbbbbb");
-
-          console.log(oneResponse.data.resultsPage, "aaaaaaaaa");
-
-          if (oneResponse.data.resultsPage.totalEntries === 0) {
-            console.log(oneResponse.data.resultsPage);
-
-            tempArray.push(oneResponse.data.resultsPage);
-          }
-        });
-      });
-      res.json({ tempArray, topArtist });
+      Promise.all(eventIndex)
+        .then(resultArray => {
+          resultArray.forEach(oneResponse => {
+            if (oneResponse.data.resultsPage.totalEntries !== 0) {
+              tempArray.push(oneResponse.data);
+            }
+          });
+          res.json(tempArray);
+        })
+        .catch(err => next(err));
     })
     .catch(err => {
-      // console.log("wtf--------", err.response.data);
-      console.log(err);
-
       next(err);
     });
 });
