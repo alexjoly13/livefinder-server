@@ -23,7 +23,9 @@ router.get("/userInfo", (req, res, next) => {
 
       const eventIndex = artistName.map(oneQuery => {
         const name = encodeURIComponent(oneQuery);
-        const url = `https://api.songkick.com/api/3.0/events.json?apikey=j091nvHfTVMNsX7r&artist_name=${name}&location=${location}`;
+        const url = `https://api.songkick.com/api/3.0/events.json?apikey=j091nvHfTVMNsX7r&artist_name=${name}`;
+        // add this to the url to search by location
+        // &location=${location};
         console.log(url);
         return axios.get(url);
       });
