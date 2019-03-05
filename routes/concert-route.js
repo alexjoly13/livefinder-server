@@ -15,4 +15,21 @@ router.get("/concert-info/:concertId", (req, res, next) => {
   });
 });
 
+const User = require("../models/user-model.js");
+
+router.post("/concert-info/:concertId", (req, res, next) => {
+  const { concertId } = req.params;
+  User.findByIdAndUpdate(
+    req.user._id,
+    { $push: { concert: concertId } },
+    { runValidators: true }
+  )
+    .then(currentUser => {
+      console.log(currentUser, "hhhhhhh");
+
+      res.json(currentUser);
+    })
+    .catch(err => next(err));
+});
+
 module.exports = router;

@@ -63,10 +63,16 @@ app.use("/", userInfo);
 const topFrenchPage = require("./routes/top-french-artist-route.js");
 app.use("/", topFrenchPage);
 
+const topArtistsList = require("./routes/top-artists-list-route.js");
+app.use("/", topArtistsList);
+
 const relatedArtists = require("./routes/related-artists-concerts-route.js");
 app.use("/", relatedArtists);
 
 const concertInfo = require("./routes/concert-route.js");
 app.use("/", concertInfo);
+
+const addConcert = require("./routes/add-fav-concert");
+app.use("/", addConcert);
 
 module.exports = app;

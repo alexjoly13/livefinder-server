@@ -10,7 +10,8 @@ const userSchema = new Schema(
     loginToken: String,
     spotifyLink: String,
     spotifyAccesToken: String,
-    spotifyRefreshToken: String
+    spotifyRefreshToken: String,
+    concert: { type: Array }
   },
   {
     timestamps: true
