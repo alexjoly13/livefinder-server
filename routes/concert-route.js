@@ -8,7 +8,7 @@ router.get("/concert-info/:concertId", (req, res, next) => {
   const url = `https://api.songkick.com/api/3.0/events/${concertId}.json?apikey=${apiKey}`;
 
   const concertDetails = axios.get(url).then(result => {
-    res.json(result.data.resultsPage.results.event);
+    res.json(result.data.resultsPage);
   });
 });
 

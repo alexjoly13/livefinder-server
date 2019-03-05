@@ -72,4 +72,7 @@ app.use("/", relatedArtists);
 const concertInfo = require("./routes/concert-route.js");
 app.use("/", concertInfo);
 
+const genericHomePage = require("./routes/generic-homepage.js");
+app.use("/", genericHomePage);
+
 module.exports = app;
