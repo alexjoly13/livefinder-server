@@ -72,7 +72,4 @@ app.use("/", relatedArtists);
 const concertInfo = require("./routes/concert-route.js");
 app.use("/", concertInfo);
 
-const addConcert = require("./routes/add-fav-concert");
-app.use("/", addConcert);
-
 module.exports = app;

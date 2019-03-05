@@ -11,7 +11,7 @@ const userSchema = new Schema(
     spotifyLink: String,
     spotifyAccesToken: String,
     spotifyRefreshToken: String,
-    concert: { type: Array }
+    concert: [Object]
   },
   {
     timestamps: true
@@ -19,5 +19,6 @@ const userSchema = new Schema(
 );
 
 const User = mongoose.model("User", userSchema);
+userSchema.set("autoIndex", false);
 
 module.exports = User;
