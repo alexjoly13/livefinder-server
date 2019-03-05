@@ -69,4 +69,7 @@ app.use("/", topArtistsList);
 const relatedArtists = require("./routes/related-artists-concerts-route.js");
 app.use("/", relatedArtists);
 
+const concertInfo = require("./routes/concert-route.js");
+app.use("/", concertInfo);
+
 module.exports = app;

@@ -46,7 +46,7 @@ router.get("/similar-artist", (req, res, next) => {
         const eventIndex = relatedArtistsName.map(oneQuery => {
           const formattedName = encodeURIComponent(oneQuery);
           const url = `https://api.songkick.com/api/3.0/events.json?apikey=${apiKey}&artist_name=${formattedName}&location=${location}`;
-          console.log(url);
+
           return axios.get(url);
         });
 
@@ -58,7 +58,6 @@ router.get("/similar-artist", (req, res, next) => {
               }
             });
             res.json(fullConcertArray);
-            console.log(fullConcertArray);
           })
           .catch(err => next(err));
       });
