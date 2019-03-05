@@ -14,8 +14,9 @@ router.get("/userInfo", (req, res, next) => {
     .get(url, { headers: { Authorization: accessToken } })
 
     .then(response => {
-      // console.log(response.data);
       const artistName = [];
+      // res.json(response);
+      console.log(response);
       response.data.items.forEach(oneArtist => {
         artistName.push(oneArtist.name);
       });
