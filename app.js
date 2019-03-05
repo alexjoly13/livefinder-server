@@ -75,4 +75,7 @@ app.use("/", concertInfo);
 const addConcert = require("./routes/add-fav-concert");
 app.use("/", addConcert);
 
+const genericHomePage = require("./routes/generic-homepage.js");
+app.use("/", genericHomePage);
+
 module.exports = app;
