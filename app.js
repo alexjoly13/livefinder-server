@@ -75,4 +75,7 @@ app.use("/", concertInfo);
 const genericHomePage = require("./routes/generic-homepage.js");
 app.use("/", genericHomePage);
 
+const nextConcertsParis = require("./routes/generic-concerts-paris.js");
+app.use("/", nextConcertsParis);
+
 module.exports = app;
