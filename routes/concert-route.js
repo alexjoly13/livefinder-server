@@ -10,6 +10,7 @@ router.get("/concert-info/:concertId", (req, res, next) => {
   const url = `https://api.songkick.com/api/3.0/events/${concertId}.json?apikey=${apiKey}`;
 
   const concertDetails = axios.get(url).then(result => {
+    console.log(result.data.resultsPage);
     res.json(result.data.resultsPage);
   });
 });
