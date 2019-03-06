@@ -14,6 +14,7 @@ router.get("/userInfo", (req, res, next) => {
     .get(url, { headers: { Authorization: accessToken } })
 
     .then(response => {
+      const megaArray = [];
       const artistName = [];
       // res.json(response);
       console.log(response);

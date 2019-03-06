@@ -17,4 +17,9 @@ router.get("/generic", (req, res, next) => {
     });
 });
 
+router.post("/generic", (req, res, next) => {
+  const test = req.body.name;
+  console.log(test);
+});
+
 module.exports = router;
