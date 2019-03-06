@@ -81,4 +81,7 @@ app.use("/", nextConcertsParis);
 const spotiPlayer = require("./routes/spotiPlayer.js");
 app.use("/", spotiPlayer);
 
+const dashBoardInfo = require("./routes/dashBoardinfo.js");
+app.use("/", dashBoardInfo);
+
 module.exports = app;
