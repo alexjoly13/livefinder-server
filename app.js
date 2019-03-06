@@ -78,4 +78,7 @@ app.use("/", genericHomePage);
 const nextConcertsParis = require("./routes/generic-concerts-paris.js");
 app.use("/", nextConcertsParis);
 
+const spotiPlayer = require("./routes/spotiPlayer.js");
+app.use("/", spotiPlayer);
+
 module.exports = app;
