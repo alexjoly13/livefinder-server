@@ -7,7 +7,6 @@ router.get("/spotiPlayer", (req, res, next) => {
   const url =
     "https://api.spotify.com/v1/me/top/artists?limit=5&time_range=short_term";
   const accessToken = "Bearer " + req.user.spotifyAccesToken;
-  const apiKey = process.env.SONGKICK_API_KEY;
 
   axios.get(url, { headers: { Authorization: accessToken } }).then(response => {
     // console.log(response.data);
