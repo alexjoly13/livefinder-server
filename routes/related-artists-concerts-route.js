@@ -28,15 +28,13 @@ router.get("/similar-artist", (req, res, next) => {
             next(err);
           });
       });
-      // console.log(allIndex);
       const relatedArtistsName = [];
+      const infoArtists = [];
 
       Promise.all(allIndex).then(results => {
-        // console.log(results[0].data);
+        infoArtists.push(results[0].data);
         results.forEach(oneSimilarName => {
-          // console.log(oneSimilarName.data.artists.name);
           oneSimilarName.data.artists.map(oneArtistName => {
-            // console.log(oneArtistName.name);
             relatedArtistsName.push(oneArtistName.name);
           });
         });
