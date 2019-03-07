@@ -83,6 +83,7 @@ app.use("/", artistDetails);
 
 const test = require("./routes/test.js");
 app.use("/", test);
+
 const spotiPlayer = require("./routes/spotiPlayer.js");
 app.use("/", spotiPlayer);
 
