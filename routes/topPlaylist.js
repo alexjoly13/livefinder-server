@@ -4,7 +4,7 @@ const axios = require("axios");
 
 const User = require("../models/user-model.js");
 
-router.get("/dashboard-info", (req, res, next) => {
+router.get("/get-top-playlist", (req, res, next) => {
   const url = "https://api.spotify.com/v1/me/playlists?limit=5";
   const accessToken = "Bearer " + req.user.spotifyAccesToken;
 

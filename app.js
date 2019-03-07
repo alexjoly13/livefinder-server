@@ -87,8 +87,8 @@ app.use("/", test);
 const spotiPlayer = require("./routes/spotiPlayer.js");
 app.use("/", spotiPlayer);
 
-const dashBoardInfo = require("./routes/dashBoardinfo.js");
-app.use("/", dashBoardInfo);
+const topPlaylist = require("./routes/topPlaylist.js");
+app.use("/", topPlaylist);
 
 const deleteConcert = require("./routes/delete-concert.js");
 app.use("/", deleteConcert);
