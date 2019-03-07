@@ -32,8 +32,6 @@ router.post("/concert-info/:concertId", (req, res, next) => {
         { runValidators: true }
       )
         .then(currentUser => {
-          console.log(currentUser, "hhhhhhh");
-
           res.json(currentUser);
         })
         .catch(err => next(err));
