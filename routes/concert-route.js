@@ -29,7 +29,7 @@ router.post("/concert-info/:concertId", (req, res, next) => {
             concert: result.data.resultsPage.results.event
           }
         },
-        { runValidators: true }
+        { new: true, runValidators: true }
       )
         .then(currentUser => {
           res.json(currentUser);

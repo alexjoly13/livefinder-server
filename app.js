@@ -84,4 +84,7 @@ app.use("/", spotiPlayer);
 const dashBoardInfo = require("./routes/dashBoardinfo.js");
 app.use("/", dashBoardInfo);
 
+const deleteConcert = require("./routes/delete-concert.js");
+app.use("/", deleteConcert);
+
 module.exports = app;

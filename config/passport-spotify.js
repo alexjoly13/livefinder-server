@@ -8,12 +8,12 @@ passport.use(
     {
       clientID: process.env.SPOTIFY_ID,
       clientSecret: process.env.SPOTIFY_SECRET,
-      callbackURL: "http://localhost:8888/auth/spotify/callback",
+      callbackURL: "https://live-me.herokuapp.com/auth/spotify/callback",
       passReqToCallback: true
     },
     function(req, accessToken, refreshToken, profile, done) {
       const loginToken = uuidv1();
-      req.session.returnTo = `http://localhost:3000/connected/${loginToken}`;
+      req.session.returnTo = `https://live-me.herokuapp.com/connected/${loginToken}`;
 
       User.findOneAndUpdate(
         { spotifyId: profile.id },

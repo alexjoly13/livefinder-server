@@ -16,18 +16,4 @@ router.get("/dashboard-info", (req, res, next) => {
     .catch(err => next(err));
 });
 
-router.post("/dashboard-info", (req, res, next) => {
-  User.find;
-});
-
-// router.get("/delete-concert/:concertId", (req, res, next) => {
-//   const { concertId } = req.params;
-
-//   User.findByIdAndUpdate(
-//     req.user._id,
-//     { $pull: { concert: result.data.resultsPage.results.event } },
-//     { runValidators: true }
-//   ).catch(err => next(err));
-// });
-
 module.exports = router;
