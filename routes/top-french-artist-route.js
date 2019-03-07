@@ -17,13 +17,13 @@ router.get("/top-french", (req, res, next) => {
       response.data.albums.items.forEach(oneArtist => {
         artistName.push(oneArtist.artists[0].name);
       });
-      console.log(artistName);
+      // console.log(artistName);
       const tempArray = [];
       const location = req.ip === "::1" ? "clientip" : req.ip;
       const eventIndex = artistName.map(oneQuery => {
         const name = encodeURIComponent(oneQuery);
         const url = `https://api.songkick.com/api/3.0/events.json?apikey=j091nvHfTVMNsX7r&artist_name=${name}&location=${location}`;
-        console.log(url);
+        // console.log(url);
         return axios.get(url);
       });
       Promise.all(eventIndex)
