@@ -20,8 +20,8 @@ router.get(
 router.get(
   "/auth/spotify/callback",
   passport.authenticate("spotify", {
-    failureRedirect: "http://localhost:3000",
-    successReturnToOrRedirect: "http://localhost:3000/connected"
+    failureRedirect: "https://live-me.herokuapp.com/",
+    successReturnToOrRedirect: "https://live-me.herokuapp.com/connected"
   })
 );
 
