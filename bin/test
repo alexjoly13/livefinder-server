@@ -1,0 +1,50 @@
+const express = require("express");
+const router = express.Router();
+const axios = require("axios");
+
+router.get("/test", (req, res, next) => {
+  const kickApi = process.env.SONGKICK_API_KEY;
+  const lastApi = process.env.LASTFM_API_KEY;
+  const location = req.ip === "::1" ? "clientip" : req.ip;
+  const artistName = [];
+  const dataArray = [];
+
+  const url =
+    "https://api.spotify.com/v1/me/top/artists?limit=20&time_range=short_term";
+  const accessToken = "Bearer " + req.user.spotifyAccesToken;
+  const spotifyRequest = axios
+    .get(url, { headers: { Authorization: accessToken } })
+    .then(response => {
+      response.data.items.forEach(oneArtist => {
+        artistName.push(oneArtist.name);
+        // console.log(oneArtist.name);
+      });
+    });
+  console.log(artistName);
+
+  function getArtistConcert() {
+    return axios.get(
+      `https://api.songkick.com/api/3.0/events.json?apikey=${kickApi}&artist_name=${artistName}&location=${location}`
+    );
+  }
+
+  function getArtistInfos() {
+    return axios.get(
+      `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artistName}&api_key=${lastApi}&format=json`
+    );
+  }
+
+  // Promise.all([getArtistConcert(), getArtistInfos()])
+  //   .then(function(bigArray) {
+  //     bigArray.forEach(oneData => {
+  //       // console.log(oneData.data);
+  //       dataArray.push(oneData.data);
+  //     });
+  //     // console.log(dataArray);
+  //     // console.log(bigArray);
+  //     res.json(dataArray);
+  //   })
+  //   .catch(err => next(err));
+});
+
+module.exports = router;
