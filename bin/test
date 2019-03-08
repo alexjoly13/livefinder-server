@@ -5,6 +5,7 @@ const axios = require("axios");
 router.get("/test", (req, res, next) => {
   const kickApi = process.env.SONGKICK_API_KEY;
   const lastApi = process.env.LASTFM_API_KEY;
+  console.log("IP ADDRESS ---------------------------", req.ip);
   const location = req.ip === "::1" ? "clientip" : req.ip;
   const artistName = [];
   const dataArray = [];

@@ -15,6 +15,7 @@ router.get("/top-french", (req, res, next) => {
         artistName.push(oneArtist.artists[0].name);
       });
       const tempArray = [];
+      console.log("IP ADDRESS ---------------------------", req.ip);
       const location = req.ip === "::1" ? "clientip" : req.ip;
       const eventIndex = artistName.map(oneQuery => {
         const name = encodeURIComponent(oneQuery);

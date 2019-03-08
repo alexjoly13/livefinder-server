@@ -21,6 +21,7 @@ router.get("/test", (req, res, next) => {
         artistName.push(oneArtist.name);
       });
 
+      console.log("IP ADDRESS ---------------------------", req.ip);
       const location = req.ip === "::1" ? "clientip" : req.ip;
 
       const eventIndex = artistName.map(oneQuery => {
@@ -49,6 +50,7 @@ router.get("/test", (req, res, next) => {
 
   // const kickApi = process.env.SONGKICK_API_KEY;
   // const lastApi = process.env.LASTFM_API_KEY;
+  // console.log("IP ADDRESS ---------------------------", req.ip);
   // const location = req.ip === "::1" ? "clientip" : req.ip;
   // const artistName = [];
   // const dataArray = [];
@@ -68,6 +70,7 @@ router.get("/test", (req, res, next) => {
   //     });
   //     // console.log(artistName);
   //     const allEvents = artistName.map(oneQuery => {
+  //       console.log("IP ADDRESS ---------------------------", req.ip);
   //       const location = req.ip === "::1" ? "clientip" : req.ip;
   //       const name = encodeURIComponent(oneQuery);
   //       const url = `https://api.songkick.com/api/3.0/events.json?apikey=${kickApi}&artist_name=${name}&location=${location}`;

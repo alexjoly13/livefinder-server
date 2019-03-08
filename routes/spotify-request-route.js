@@ -18,6 +18,7 @@ router.get("/userInfo", (req, res, next) => {
       });
 
       const tempArray = [];
+      console.log("IP ADDRESS ---------------------------", req.ip);
       const location = req.ip === "::1" ? "clientip" : req.ip;
 
       const eventIndex = artistName.map(oneQuery => {

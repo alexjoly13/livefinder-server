@@ -36,6 +36,7 @@ router.get("/similar-artist", (req, res, next) => {
           });
         });
         const fullConcertArray = [];
+        console.log("IP ADDRESS ---------------------------", req.ip);
         const location = req.ip === "::1" ? "clientip" : req.ip;
 
         const eventIndex = relatedArtistsName.map(oneQuery => {
