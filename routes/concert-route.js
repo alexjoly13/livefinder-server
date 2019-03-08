@@ -16,7 +16,6 @@ router.get("/concert-info/:concertId", (req, res, next) => {
       artistName =
         result.data.resultsPage.results.event.performance[0].displayName;
       allData.push(result.data.resultsPage.results.event);
-      // console.log(allData);
 
       const encodedName = encodeURI(artistName);
 
@@ -25,15 +24,9 @@ router.get("/concert-info/:concertId", (req, res, next) => {
           `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodedName}&api_key=${lastApiKey}&format=json`
         )
         .then(results => {
-          // console.log(results.data.artist);
           allData.push(results.data.artist);
-          // console.log(allData);
           res.json(allData);
         });
-
-      // console.log(artistName);
-
-      // res.json(result.data.resultsPage);
     })
     .catch(err => next(err));
 });
