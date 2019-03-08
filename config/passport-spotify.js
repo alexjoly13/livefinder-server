@@ -11,7 +11,8 @@ passport.use(
       clientID: process.env.SPOTIFY_ID,
       clientSecret: process.env.SPOTIFY_SECRET,
       callbackURL: "/auth/spotify/callback",
-      passReqToCallback: true
+      passReqToCallback: true,
+      proxy: true
     },
     function(req, accessToken, refreshToken, profile, done) {
       const loginToken = uuidv1();
