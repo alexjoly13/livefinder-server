@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+const getLocationFromReq = require("../lib/get-location-from-req.js");
 
 router.get("/similar-artist", (req, res, next) => {
   const url =

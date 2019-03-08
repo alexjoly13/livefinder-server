@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 
+const getLocationFromReq = require("../lib/get-location-from-req.js");
+
 router.get("/userInfo", (req, res, next) => {
   const url =
     "https://api.spotify.com/v1/me/top/artists?limit=20&time_range=short_term";
@@ -18,8 +20,7 @@ router.get("/userInfo", (req, res, next) => {
       });
 
       const tempArray = [];
-      console.log("IP ADDRESS ---------------------------", req.ip);
-      const location = req.ip === "::1" ? "clientip" : req.ip;
+      const location = getLocationFromReq(req);
 
       const eventIndex = artistName.map(oneQuery => {
         const name = encodeURIComponent(oneQuery);
