@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+
 const getLocationFromReq = require("../lib/get-location-from-req.js");
 
 router.get("/similar-artist", (req, res, next) => {
@@ -8,6 +9,7 @@ router.get("/similar-artist", (req, res, next) => {
     "https://api.spotify.com/v1/me/top/artists?limit=5&time_range=short_term";
   const accessToken = "Bearer " + req.user.spotifyAccesToken;
   const apiKey = process.env.SONGKICK_API_KEY;
+  const location = getLocationFromReq(req, "/similar-artist");
 
   axios
     .get(url, { headers: { Authorization: accessToken } })
@@ -37,8 +39,6 @@ router.get("/similar-artist", (req, res, next) => {
           });
         });
         const fullConcertArray = [];
-        console.log("IP ADDRESS ---------------------------", req.ip);
-        const location = req.ip === "::1" ? "clientip" : req.ip;
 
         const eventIndex = relatedArtistsName.map(oneQuery => {
           const formattedName = encodeURIComponent(oneQuery);
