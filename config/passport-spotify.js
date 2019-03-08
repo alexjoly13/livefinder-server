@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const SpotifyStrategy = require("passport-spotify").Strategy;
 const passport = require("passport");
 const User = require("../models/user-model.js");
@@ -8,12 +10,12 @@ passport.use(
     {
       clientID: process.env.SPOTIFY_ID,
       clientSecret: process.env.SPOTIFY_SECRET,
-      callbackURL: "http://localhost:8888/auth/spotify/callback",
+      callbackURL: "/auth/spotify/callback",
       passReqToCallback: true
     },
     function(req, accessToken, refreshToken, profile, done) {
       const loginToken = uuidv1();
-      req.session.returnTo = `http://localhost:3000/connected/${loginToken}`;
+      req.session.returnTo = `${process.env.FRONT_URL}/connected/${loginToken}`;
 
       User.findOneAndUpdate(
         { spotifyId: profile.id },
