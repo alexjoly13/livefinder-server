@@ -42,7 +42,7 @@ router.get("/similar-artist", (req, res, next) => {
 
         const eventIndex = relatedArtistsName.map(oneQuery => {
           const formattedName = encodeURIComponent(oneQuery);
-          const url = `https://api.songkick.com/api/3.0/events.json?apikey=${apiKey}&artist_name=${formattedName}&location=${location}`;
+          const url = `https://api.songkick.com/api/3.0/events.json?apikey=${apiKey}&artist_name=${formattedName}&location=geo:48.866667,2.333333`;
 
           return axios.get(url);
         });
