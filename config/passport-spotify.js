@@ -10,13 +10,13 @@ passport.use(
     {
       clientID: process.env.SPOTIFY_ID,
       clientSecret: process.env.SPOTIFY_SECRET,
-      callbackURL: "https://livefinder-eu.herokuapp.com/auth/spotify/callback",
+      callbackURL: "/auth/spotify/callback",
       passReqToCallback: true,
       proxy: true,
     },
     function (req, accessToken, refreshToken, profile, done) {
       const loginToken = uuidv1();
-      req.session.returnTo = `https://livefinder-eu.herokuapp.com//connected/${loginToken}`;
+      req.session.returnTo = `https://livefinder-eu.herokuapp.com/connected/${loginToken}`;
 
       User.findOneAndUpdate(
         { spotifyId: profile.id },
