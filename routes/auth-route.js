@@ -12,16 +12,16 @@ router.get(
   "/auth/spotify",
   passport.authenticate("spotify", {
     scope: ["user-read-email", "user-read-private", "user-top-read"],
-    showDialog: true
+    showDialog: true,
   }),
-  function(req, res) {}
+  function (req, res) {}
 );
 
 router.get(
   "/auth/spotify/callback",
   passport.authenticate("spotify", {
-    failureRedirect: process.env.FRONT_URL,
-    successReturnToOrRedirect: `${process.env.FRONT_URL}/connected`
+    failureRedirect: "https://livefinder-eu.herokuapp.com/",
+    successReturnToOrRedirect: `https://livefinder-eu.herokuapp.com/connected`,
   })
 );
 
@@ -32,7 +32,7 @@ router.post("/auth/token-login", (req, res, next) => {
     { $unset: { loginToken: "" } },
     { new: true }
   )
-    .then(userDoc => {
+    .then((userDoc) => {
       if (!userDoc) {
         next(new Error(`No user with loginToken ${loginToken}`));
         return;
@@ -44,7 +44,7 @@ router.post("/auth/token-login", (req, res, next) => {
         res.json(userDoc);
       });
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 });
 
 router.get("/logout", (req, res, next) => {

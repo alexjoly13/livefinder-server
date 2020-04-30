@@ -10,13 +10,13 @@ passport.use(
     {
       clientID: process.env.SPOTIFY_ID,
       clientSecret: process.env.SPOTIFY_SECRET,
-      callbackURL: "/auth/spotify/callback",
+      callbackURL: "https://livefinder-eu.herokuapp.com/auth/spotify/callback",
       passReqToCallback: true,
-      proxy: true
+      proxy: true,
     },
-    function(req, accessToken, refreshToken, profile, done) {
+    function (req, accessToken, refreshToken, profile, done) {
       const loginToken = uuidv1();
-      req.session.returnTo = `${process.env.FRONT_URL}/connected/${loginToken}`;
+      req.session.returnTo = `https://livefinder-eu.herokuapp.com//connected/${loginToken}`;
 
       User.findOneAndUpdate(
         { spotifyId: profile.id },
@@ -24,12 +24,12 @@ passport.use(
           $set: {
             loginToken,
             spotifyAccesToken: accessToken,
-            spotifyRefreshToken: refreshToken
-          }
+            spotifyRefreshToken: refreshToken,
+          },
         },
         { new: true }
       )
-        .then(userDoc => {
+        .then((userDoc) => {
           if (userDoc) {
             done(null, userDoc);
             return;
@@ -43,14 +43,14 @@ passport.use(
             spotifyLink: profile.profileUrl,
             spotifyAccesToken: accessToken,
             spotifyRefreshToken: refreshToken,
-            loginToken
+            loginToken,
           })
-            .then(userDoc => {
+            .then((userDoc) => {
               done(null, userDoc);
             })
-            .catch(err => done(err));
+            .catch((err) => done(err));
         })
-        .catch(error => {
+        .catch((error) => {
           done(error);
         });
     }
