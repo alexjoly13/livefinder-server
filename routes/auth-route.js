@@ -20,8 +20,8 @@ router.get(
 router.get(
   "/auth/spotify/callback",
   passport.authenticate("spotify", {
-    failureRedirect: "https://livefinder-eu.herokuapp.com/",
-    successReturnToOrRedirect: `https://livefinder-eu.herokuapp.com/connected`,
+    failureRedirect: process.env.FRONT_URL,
+    successReturnToOrRedirect: `${process.env.FRONT_URL}/connected`,
   })
 );
 

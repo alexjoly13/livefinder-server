@@ -16,7 +16,7 @@ passport.use(
     },
     function (req, accessToken, refreshToken, profile, done) {
       const loginToken = uuidv1();
-      req.session.returnTo = `https://livefinder-eu.herokuapp.com/connected/${loginToken}`;
+      req.session.returnTo = `${process.env.FRONT_URL}/connected/${loginToken}`;
 
       User.findOneAndUpdate(
         { spotifyId: profile.id },
